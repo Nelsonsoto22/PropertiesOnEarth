@@ -1,5 +1,5 @@
 # PropertiesOnEarth
-Web API for the Properties on earth System
+Web API for the Properties on earth System, where someone can create a user, consult and add properties.
 
 ## Nugget Package Used
 
@@ -38,3 +38,6 @@ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 6.0.1
 |PUT|Property|https://localhost:7064/api/property/1|
 |DELETE|Property|https://localhost:7064/api/property/1|
 
+## License
+
+MIT
