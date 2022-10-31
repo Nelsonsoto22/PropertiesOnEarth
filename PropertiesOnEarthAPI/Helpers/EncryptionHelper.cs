@@ -1,43 +1,33 @@
 using System.Text;
-using CryptoHelper;
 using Konscious.Security.Cryptography;
+using System.Security.Cryptography;
 
 namespace PropertiesOnEarthAPI.Helpers
 {
     public class EncryptionHelper
     {
-        // Method for hashing the password
-        public string HashPassword(string password)
+        public bool VerifyHash(string password, string hash, string salt, string pepper)
         {
-            return Crypto.HashPassword(password);
+            var newHash = HashPassword(password, salt, pepper);
+            return hash == newHash;
         }
-        // Method to verify the password hash against the given password
-        public bool VerifyPassword(string hash, string password)
-        {
-            return Crypto.VerifyHashedPassword(hash, password);
-        }
-        private bool VerifyHash(string password, byte[] salt, byte[] hash)
-        {
-            var newHash = HashPassword(password, salt);
-            return hash.SequenceEqual(newHash);
-        }
-        private byte[] CreateSalt()
+        public string CreateSalt()
         {
             var buffer = new byte[16];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(buffer);
-            return buffer;
+            return Convert.ToBase64String(buffer);
         }
-        private byte[] HashPassword(string password, byte[] salt)
+        public string HashPassword(string password, string salt, string pepper)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
 
-            argon2.Salt = salt;
+            argon2.Salt = Encoding.UTF8.GetBytes(salt + pepper);
             argon2.DegreeOfParallelism = 8; // four cores
             argon2.Iterations = 4;
             argon2.MemorySize = 1024 * 1024; // 1 GB
 
-            return argon2.GetBytes(16);
+            return Convert.ToBase64String(argon2.GetBytes(16));
         }
 
     }
