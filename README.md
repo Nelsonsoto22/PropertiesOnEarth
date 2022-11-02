@@ -1,6 +1,12 @@
 # PropertiesOnEarth
 Web API for the Properties on earth System, where someone can create a user, consult and add properties.
 
+## Tech
+- DotNet Core 6.0
+- Entity Framework
+- JWT Authentication/Authorization
+
+
 ## Nugget Package Used
 
 - Cryptography
@@ -14,6 +20,7 @@ dotnet add package Konscious.Security.Cryptography.Argon2 --version 1.3.0
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.0-rc.2.22472.11
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 7.0.0-rc.2.22472.11
 dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 7.0.0-rc.2.22472.11
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 7.0.0-rc.2.22472.11
 ```
 
 - JWT Authentication
